@@ -28,7 +28,7 @@ assert page.all('table#movies/tbody tr').count == 10
 end
 
 Then /^I should see no movies$/ do
-  assert page.all('table·movies/tbody tr').count == 0
+  assert page.all('table#movies/tbody tr').count == 0
 end
 
 
