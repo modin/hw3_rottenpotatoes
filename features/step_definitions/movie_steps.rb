@@ -4,10 +4,24 @@ Given /the following movies exist:$/ do |movies_table|
 #puts movie.to_s
   Movie.create!(movie)
     # each returned element will be a hash whose key is the table header.
-    # you should arrange to add that movie to the database here.
+    # you should arrange to add that movie to: the database here.
   end
 #  assert false, "Unimplmemented"
 end
+
+#parte 2, b
+Given /^I check the following ratings: (.*)/ do |ratings|
+  ratings.split(", ").each do |m|
+    puts %Q{I check "rating_#{m}"}
+    When %Q{I check "ratings_#{m}"}
+  end
+end
+
+#parte 2, c
+Then /^I should see all of the movies$/ do
+  page.find('table#movies tbody').all('tr').count.should == 10
+#rows == 10
+  end
 
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
@@ -22,8 +36,8 @@ end
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
 
-When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
+#When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-end
+#end
