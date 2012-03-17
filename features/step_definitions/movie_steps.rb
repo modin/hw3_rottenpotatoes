@@ -12,17 +12,31 @@ end
 #parte 2, b
 Given /^I check the following ratings: (.*)/ do |ratings|
   ratings.split(", ").each do |m|
-    puts %Q{I check "rating_#{m}"}
+    puts %Q{I check "ratings_#{m}"}
     When %Q{I check "ratings_#{m}"}
   end
 end
 
 #parte 2, c
 Then /^I should see all of the movies$/ do
-  page.find('table#movies tbody').all('tr').count.should == 10
-#rows == 10
-  end
+assert page.all('table#movies/tbody tr').count == 10
 
+#  puts page.all(:xpath, '//table[@id="movies"]//tr').to_s
+#  puts page.all(:xpath, '//table[@id="movies"]/tbody/tr').count.to_s
+#  puts page.all(:xpath, '//table[@id="movies"]/tbody/tr').count == 10
+#  assert page.all(:xpath, '//table[@id="movies"]/tbody/tr').count == 10
+end
+
+Then /^I should see no movies$/ do
+  assert page.all('table·movies/tbody tr').count == 0
+end
+
+
+Given /^I uncheck the following ratings: (.*)/ do |ratings|
+  ratings.split(", ").each do |m|
+    When %Q{I uncheck "ratings_#{m}"}
+  end
+end
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
 
