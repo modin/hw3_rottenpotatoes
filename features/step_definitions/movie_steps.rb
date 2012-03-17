@@ -37,13 +37,28 @@ Given /^I uncheck the following ratings: (.*)/ do |ratings|
     When %Q{I uncheck "ratings_#{m}"}
   end
 end
+
+
+Given /I add "(.*)" and "(.*)"/ do |e1, e2|
+end
+
+Given /I sort by date/ do
+  click_link "release_date_header"
+end
+
+Given /I sort by name/ do
+  click_link "title_header"
+end
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
-
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  assert false, "Unimplmemented"
+#puts (page.body.to_s =~ /#{e1}/)
+#puts (page.body.to_s =~ /#{e2}/)
+#  puts (page.body.to_s =~ /#{e1}/) < (page.body.to_s =~ /#{e2}/)
+  assert (page.body.to_s =~ /#{e1}/) < (page.body.to_s =~ /#{e2}/)
+#assert false, "Unimplmemented"
 end
 
 # Make it easier to express checking or unchecking several boxes at once
